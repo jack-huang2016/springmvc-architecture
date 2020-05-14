@@ -11,7 +11,22 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 自动扫描该包，使SpringMVC认为该包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="com.test.sample.web.controller"/>
-    <!--开启注解扫描功能-->
-    <mvc:annotation-driven/>
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+
+    <!-- 解决SpringMvc使用@RequestMapping + @ResponseBody注解时字符串返回中文乱码问题 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>*/*;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 </beans>
