@@ -22,12 +22,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
+@RequestMapping("/my")
 public class MyController {
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(value = "test", method= RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> test(){
-        System.out.println("nihao ");
+        System.out.println("nihao");
         return new ResponseEntity<>("成功了", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="test2", method= RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> test2(){
+        System.out.println("nihao2");
+        return new ResponseEntity<>("成功了2", HttpStatus.OK);
     }
 }
